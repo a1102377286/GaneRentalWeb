@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.Data;
 
 @TableName(value = "user")
+@Data
 public class User extends Model<User> {
     @TableId(type = IdType.ASSIGN_UUID)
     private String uid;
