@@ -15,6 +15,7 @@ public class User extends Model<User> {
     private String password;
     private String name; // 用户昵称
     private String pictureURL; // 用户头像地址
+    private String email;
     private Double money; // 用户余额 暂定与人民币10:1
     /*
        用户支付和提现时都需要输入支付密码 6位数字
