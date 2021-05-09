@@ -3,8 +3,11 @@ package com.example.demo.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 用于前端页面的转跳
+ */
 @Controller
-public class MyController {
+public class BaseController {
     @RequestMapping("/index")
     public String index(){
         return "index";

@@ -41,15 +41,18 @@
 
         });
     </script>
+    <script th:inline="javascript">
+        var contextPath = [[${#request.getContextPath()}]];
+    </script>
     <script>
         $(function () {
             $.validator.addMethod("registerName",function (value,element,params) {
                 var flag = false;
                 $.ajax({
-                    url:"/blog/user/checkUser",
+                    url:contextPath + "/user/checkUsername",
                     data:{username:value},
                     success:function (data) {
-                        flag = !data.flag;
+                        flag = data.flag;
                     },
                     dataType:"json",
                     async:false
@@ -60,7 +63,7 @@
             $("#login").click(function () {
                 var flag =$("#loginForm").valid();
                 if(flag){
-                    $.post("/blog/user/login",
+                    $.post(contextPath + "/user/login",
                         $("#loginForm").serialize(),
                         function (data) {
                             if(data.flag){
@@ -75,12 +78,12 @@
             $("#register").click(function () {
                 var flag = $("#registerForm").valid();
                 if(flag){
-                    $.post("/blog/user/registerUser",
+                    $.post(contextPath + "/user/register",
                         $("#registerForm").serialize(),
                         function (data) {
                             if(data.flag){
                                 alert("注册成功!");
-                                location.href = "login.html";
+                                location.href = "login";
                             }else {
                                 alert(data.errorMsg);
                             }
