@@ -1,49 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />  
 	<meta name="keywords" content=" " />  
 	<meta name="description" content=" " />
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/center.css">
+	<link rel="stylesheet" href="css/reset.css" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/common.css}">
+	<link rel="stylesheet" href="css/center.css" th:href="@{/css/center.css}">
 	<script src="js/jquery-1.8.1.min.js"></script>
 	<!-- <script src="js/Popt.js"></script>
 	<script src="js/cityJson.js"></script>
 	<script src="js/citySet.js"></script> -->
 	<script src="js/center.js"></script>
 	<title>个人中心</title>
+	<script th:inline="javascript">
+		var contextPath = [[${#request.getContextPath()}]];
+	</script>
+	<script>
+		$(function () {
+			$("#navigation").load(contextPath + "/navigation")
+		})
+	</script>
 </head>
 <body>
 	<!-- 顶部导航 -->
-	<div class="header">
-		<div class="wrapper clearfix">
-			<ul class="nav">
-				<li><a href="">首页</a></li>
-				<li><a target="_blank" href="account-deal.html">账号交易</a></li>
-				<li><a target="_blank" href="account-purchase.html">账号求购</a></li>
-				<li><a target="_blank" href="material-deal.html">材料交易</a></li>
-				<li><a target="_blank" href="material-purchase.html">材料求购</a></li>
-				<li><a target="_blank" href="">金币交易</a></li>
-				<li><a target="_blank" href="">二手电脑</a></li>
-			</ul>
-
-			<div class="user-info">
-				
-				<!-- 我的订单 -->
-				<div class="register">
-					<a href=""><p>免费注册</p></a>
-				</div>
-				<div class="login">
-					<a href=""><p>登录</p></a>
-				</div>
-				<div class="order">
-					<a href=""><p>个人中心</p></a>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="header" id="navigation"></div>
 	<!-- 个人中心 -->
 	<div class="content clearfix">
 		<div class="wrapper clearfix">
@@ -417,7 +399,7 @@
 						<div class="i-list clearfix">
 							<input type="text" class="b-i b-i-phone" placeholder="添加更换手机号">
 							<input type="text" class="b-i b-i-num" value="" placeholder="此手机号需绑定几个账号">
-							<select name="" id="" class="b-i-status b-i">
+							<select name="selsel" id="sel" class="b-i-status b-i">
 								<option value="">未发送</option>
 								<option value="">已发送</option>
 							</select>
@@ -432,7 +414,7 @@
 						<div class="i-list clearfix">
 							<input type="text" class="b-i b-i-phone" placeholder="添加更换手机号">
 							<input type="text" class="b-i b-i-num" value="" placeholder="此手机号需绑定几个账号">
-							<select name="" id="" class="b-i-status b-i">
+							<select name="ispush" id="ispush" class="b-i-status b-i">
 								<option value="">未发送</option>
 								<option value="">已发送</option>
 							</select>
@@ -522,7 +504,7 @@
 						<!-- 全部订单 -->
 						<div class="total-order">
 							<div class="select-area">
-								<input type="checkbox" name="" id="">
+								<input type="checkbox" name="" id="option">
 								<div class="o-btn fl">全选</div>
 								<div class="o-btn fl">下架</div>
 								<div class=" o-btn publishBtn">立即发布</div>
@@ -532,7 +514,7 @@
 									<li class="item-order">
 										<div class="item-order-info p-item-info">
 											<div class="order-number o-text">
-												<input type="checkbox" name="" id="">
+												<input type="checkbox" name="" id="times">
 												<span>创建时间：</span><span>2018-4-25-18:00</span>
 											</div>
 											<div class="order-item o-text">
@@ -569,7 +551,7 @@
 						<!-- 材料求购 -->
 						<div class="m-p-order" style="display: none;">
 							<div class="select-area">
-								<input type="checkbox" name="" id="">
+								<input type="checkbox" name="oll" id="allOption">
 								<div class="o-btn fl">全选</div>
 								<div class="o-btn fl">下架</div>
 								<div class=" o-btn publishBtn">立即发布</div>
@@ -579,7 +561,7 @@
 									<li class="item-order">
 										<div class="item-order-info p-item-info">
 											<div class="order-number o-text">
-												<input type="checkbox" name="" id="">
+												<input type="checkbox" name="asdasd" id="timesss">
 												<span>创建时间：</span><span>2018-4-25-18:00</span>
 											</div>
 											<div class="order-item o-text">
@@ -616,7 +598,7 @@
 						<!-- 账号求购 -->
 						<div class="account-p-order" style="display: none;">
 							<div class="select-area">
-								<input type="checkbox" name="" id="">
+								<input type="checkbox" name="allcc" id="allcc">
 								<div class="o-btn fl">全选</div>
 								<div class="o-btn fl">下架</div>
 								<div class=" o-btn publishBtn">立即发布</div>
@@ -626,7 +608,7 @@
 									<li class="item-order">
 										<div class="item-order-info p-item-info">
 											<div class="order-number o-text">
-												<input type="checkbox" name="" id="">
+												<input type="checkbox" name="" id="createTime">
 												<span>创建时间：</span><span>2018-4-25-18:00</span>
 											</div>
 											<div class="order-item o-text">
@@ -742,7 +724,7 @@
 						<!-- 商品材料 -->
 						<div class="total-order">
 							<div class="select-area">
-								<input type="checkbox" name="" id="">
+								<input type="checkbox" name="allcc1" id="allcc1">
 								<div class="o-btn fl">全选</div>
 								<div class="o-btn fl">下架</div>
 								<div class=" o-btn publishBtn">立即发布</div>
@@ -752,7 +734,7 @@
 									<li class="item-order">
 										<div class="item-order-info p-item-info">
 											<div class="order-number o-text">
-												<input type="checkbox" name="" id="">
+												<input type="checkbox" name="crttime2" id="crttime2">
 												<span>创建时间：</span><span>2018-4-25-18:00</span>
 											</div>
 											<div class="order-item o-text">
@@ -791,7 +773,7 @@
 						<!-- 商品账号 -->
 						<div class="m-p-order" style="display: none;">
 							<div class="select-area">
-								<input type="checkbox" name="" id="">
+								<input type="checkbox" name="allccc1" id="allccc1">
 								<div class="o-btn fl">全选</div>
 								<div class="o-btn fl">下架</div>
 								<div class=" o-btn publishBtn">立即发布</div>
@@ -801,7 +783,7 @@
 									<li class="item-order">
 										<div class="item-order-info p-item-info">
 											<div class="order-number o-text">
-												<input type="checkbox" name="" id="">
+												<input type="checkbox" name="crttime" id="crttime">
 												<span>创建时间：</span><span>2018-4-25-18:00</span>
 											</div>
 											<div class="order-item o-text">
@@ -848,7 +830,7 @@
 									<li class="item-order">
 										<div class="item-order-info p-item-info">
 											<div class="order-number o-text">
-												<input type="checkbox" name="" id="">
+												<input type="checkbox" name="crttime3" id="crttime3">
 												<span>创建时间：</span><span>2018-4-25-18:00</span>
 											</div>
 											<div class="order-item o-text">
@@ -1148,25 +1130,25 @@
 							<div class="i-text fl">
 								<span class="fr t-c">当前密码：</span>
 							</div>
-							<input type="password" name="" id="" class="a-input fl">
+							<input type="password" name="nowpas" id="nowpas" class="a-input fl">
 						</div>
 						<div class="info-list clearfix">
 							<div class="i-text fl">
 								<span class="fr t-c">新密码：</span>
 							</div>
-							<input type="password" name="" id="" class="a-input fl">
+							<input type="password" name="newpas" id="newpas" class="a-input fl">
 						</div>
 						<div class="info-list clearfix">
 							<div class="i-text fl">
 								<span class="fr t-c">确认新密码：</span>
 							</div>
-							<input type="password" name="" id="" class="a-input fl">
+							<input type="password" name="confirmpas" id="confirmpas" class="a-input fl">
 						</div>
 						<div class="info-list clearfix">
 							<div class="i-text fl">
 								<span class="fr t-c">验证码：</span>
 							</div>
-							<input type="text" name="" id="" class="a-input fl">
+							<input type="text" name="checkcode" id="checkcode" class="a-input fl">
 							<div class="code-img fl">
 								<img src="images/code.png" alt="">
 								<span class="t-c">看不清，换一张</span>
@@ -1225,7 +1207,7 @@
 								<div class="i-text fl">
 									<span class="fr t-c">验证码：</span>
 								</div>
-								<input type="text" name="" id="" class="a-input fl">
+								<input type="text" name="checkCode1" id="checkCode1" class="a-input fl">
 							</div>
 
 							<div class="submit-btn">
@@ -1258,13 +1240,13 @@
 								<div class="i-text fl">
 									<span class="fr t-c">新支付密码：</span>
 								</div>
-								<input type="password" name="" id="" class="a-input fl">
+								<input type="password" name="newpay" id="newpay" class="a-input fl">
 							</div>
 							<div class="info-list clearfix">
 								<div class="i-text fl">
 									<span class="fr t-c">确认支付密码：</span>
 								</div>
-								<input type="password" name="" id="" class="a-input fl">
+								<input type="password" name="conpay" id="conpay" class="a-input fl">
 								<span class="tag">支付密码必须由6-12位字母和数字混合组成</span>
 							</div>
 
@@ -1334,13 +1316,13 @@
 							<div class="i-text fl">
 								<span class="fr t-c">新手机号：</span>
 							</div>
-							<input type="text" name="" id="" class="a-input fl">
+							<input type="text" name="newMobile" id="newMobile" class="a-input fl">
 						</div>
 						<div class="info-list clearfix">
 							<div class="i-text fl">
 								<span class="fr t-c">验证码：</span>
 							</div>
-							<input type="text" name="" id="" class="a-input fl">
+							<input type="text" name="checkCode2" id="checkCode2" class="a-input fl">
 							<div class="code-img fl">
 								<img src="images/code.png" alt="">
 								<span class="t-c">看不清，换一张</span>
@@ -1371,5 +1353,6 @@
 
 			</div>
 		</div>
-	</body>
-	</html>
+	</div>
+</body>
+</html>

@@ -34,6 +34,11 @@ public class UserController {
         return info;
     }
 
+    @RequestMapping("/center")
+    public String userCenter(String username){
+        return "center";
+    }
+
     @RequestMapping("/checkUsername")
     @ResponseBody
     public ResultInfo checkUsername(String username){
