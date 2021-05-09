@@ -30,4 +30,9 @@ public class SimpleTest {
 
         userService.save(user);
     }
+
+    @Test
+    public void test01() {
+        userService.list().forEach(System.out::println);
+    }
 }

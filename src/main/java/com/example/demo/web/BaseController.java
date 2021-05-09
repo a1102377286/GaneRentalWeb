@@ -9,17 +9,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BaseController {
     @RequestMapping("/index")
-    public String index(){
+    public String index() {
         return "index";
     }
 
     @RequestMapping("/details")
-    public String details(){
+    public String details() {
         return "details";
     }
 
     @RequestMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
+    }
+
+    @RequestMapping("/material_deal")
+    public String material_deal() {
+        return "material-deal";
+    }
+
+    @RequestMapping("/navigation")
+    public String navigation() {
+        return "navigation";
     }
 }
