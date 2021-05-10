@@ -25,4 +25,9 @@ public class GameAccountController {
         model.addAttribute("next", iPage.getCurrent() + 1);
         return null;
     }
+
+    @RequestMapping("/accountPurchase")
+    public String accountPurchase() {
+        return "account-purchase";
+    }
 }
