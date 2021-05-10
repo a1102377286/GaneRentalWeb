@@ -32,4 +32,20 @@ public class BaseController {
     public String navigation() {
         return "navigation";
     }
+
+    @RequestMapping("/center")
+    public String userCenter(String username){
+        return "center";
+    }
+
+    @RequestMapping("/account-deal")
+    public String accountdeal(){
+        return "account-deal";
+    }
+
+    @RequestMapping("/account-purchase")
+    public String accountpurchase(){
+        return "account-purchase";
+    }
+
 }

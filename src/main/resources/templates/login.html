@@ -67,7 +67,7 @@
                         $("#loginForm").serialize(),
                         function (data) {
                             if(data.flag){
-                                window.location.href = contextPath + "/index";
+                                window.location.replace(contextPath + "/index");
                             }else{
                                 $("#errorMsg").html(data.errorMsg);
                             }

@@ -4,29 +4,47 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script th:inline="javascript">
+    var contextPath = [[${#request.getContextPath()}]];
+</script>
+<script>
+    $(function () {
+        $.ajax({
+            url:contextPath +"/user/isLogin",
+            data:{},
+            dataType:"json",
+            async:true,
+            success:function (data) {
+            }
+        })
+    })
+</script>
 <body>
 <div class="wrapper clearfix">
     <ul class="nav">
-        <li class="active"><a href="">首页</a></li>
-        <li><a target="_blank" href="account-deal.html" th:src="@{/rental/account-deall}">账号交易</a></li>
-        <li><a target="_blank" href="account-purchase.html" th:src="@{/rental/account-purchase.html}">账号求购</a></li>
-        <li><a target="_blank" href="material-deal.html" th:src="@{/rental/material-deal.html}">材料交易</a></li>
-        <li><a target="_blank" href="material-seller.html" th:src="@{/rental/material-seller.html}">材料求购</a></li>
-        <li><a target="_blank" href="">金币交易</a></li>
-        <li><a target="_blank" href="">二手电脑</a></li>
+        <li class="active"><a href="/rental/index">首页</a></li>
+        <li><a target="_blank" href="/rental/account-deal" th:src="@{/rental/account-deall}">账号交易</a></li>
+        <li><a target="_blank" href="/rental/account-purchase" th:src="@{/rental/account-purchase.html}">账号出租</a></li>
+<!--        <li><a target="_blank" href="material-deal.html" th:src="@{/rental/material-deal.html}">材料交易</a></li>-->
+<!--        <li><a target="_blank" href="material-seller.html" th:src="@{/rental/material-seller.html}">材料求购</a></li>-->
+<!--        <li><a target="_blank" href="">金币交易</a></li>-->
+<!--        <li><a target="_blank" href="">二手电脑</a></li>-->
     </ul>
 
     <div class="user-info">
 
         <!-- 我的订单 -->
-        <div class="register">
+        <div class="register" th:if="${session.user == null}">
             <a href=""><p>免费注册</p></a>
         </div>
-        <div class="login">
+        <div class="login" th:if="${session.user == null}">
             <a href="/rental/login"><p>登录</p></a>
         </div>
-        <div class="order">
-            <a href="/rental/user/center"><p>个人中心</p></a>
+        <div class="order" th:if="${session.user != null}">
+            <a href="/rental/center"><p>个人中心</p></a>
+        </div>
+        <div class="login" th:if="${session.user != null}">
+            <a href="/rental/user/logout"><p>推出登录</p></a>
         </div>
     </div>
 </div>

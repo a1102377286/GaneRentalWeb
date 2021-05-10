@@ -3,6 +3,7 @@ package com.example.demo.web;
 import com.example.demo.entity.ResultInfo;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
+import com.example.demo.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public ResultInfo login(User user, HttpSession session){
+    public ResultInfo login(User user){
         String username = user.getUsername();
         String password = user.getPassword();
         User loginUser = userService.getUser(username, password);
@@ -29,14 +30,9 @@ public class UserController {
             info.setErrorMsg("账号或密码错误！");
         } else {
             info.setFlag(true);
-            session.setAttribute("user", user);
+            UserUtil.setVal(user);
         }
         return info;
-    }
-
-    @RequestMapping("/center")
-    public String userCenter(String username){
-        return "center";
     }
 
     @RequestMapping("/checkUsername")
@@ -60,6 +56,15 @@ public class UserController {
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");
+        UserUtil.removeUser();
         return "redirect:/index";
+    }
+
+    @RequestMapping("/isLogin")
+    @ResponseBody
+    public String isLogin(HttpSession session) {
+        User user = (User) UserUtil.getUser(User.class);
+        session.setAttribute("user", user);
+        return "";
     }
 }
