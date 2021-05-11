@@ -1,11 +1,16 @@
 package com.example.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
 
+@TableName(value = "order")
 @Data
 public class Order {
+    @TableId(type = IdType.ASSIGN_UUID)
     private String orderID; // 用于确定订单的主键
     private Date startTime; // 订单开始时间
     private Date endTime; // 订单结束时间

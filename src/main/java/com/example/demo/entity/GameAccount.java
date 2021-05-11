@@ -14,4 +14,18 @@ import lombok.Data;
 public class GameAccount extends Model<GameAccount> {
     @TableId(type = IdType.ASSIGN_UUID)
     private String accountId;
+    /**
+     * 每小时租赁价格
+     */
+    private Double money;
+    /**
+     * 商品的图片，多个URL间用，隔开
+     */
+    private String pictureURL;
+    /**
+     * 出租方id
+     */
+    private String lessorUID;
+    private String gameId;
+
 }
