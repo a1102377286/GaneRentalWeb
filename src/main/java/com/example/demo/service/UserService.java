@@ -7,6 +7,7 @@ import com.example.demo.mapper.UserMapper;
 import com.example.demo.util.ZqbPublicUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService extends ServiceImpl<UserMapper, User> {
@@ -45,6 +46,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
      * @param password
      * @return
      */
+    @Transactional
     public User getUser(String username, String password) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("username", username);

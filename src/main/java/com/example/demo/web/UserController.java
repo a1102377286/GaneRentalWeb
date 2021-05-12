@@ -31,6 +31,7 @@ public class UserController {
         } else {
             info.setFlag(true);
             UserUtil.setVal(user);
+//            redirectIndex();
         }
         return info;
     }
@@ -42,6 +43,11 @@ public class UserController {
         ResultInfo info = new ResultInfo();
         info.setFlag(flag);
         return info;
+    }
+
+    @RequestMapping
+    private String redirectIndex() {
+        return "redirect:/index";
     }
 
     @RequestMapping("/register")
@@ -62,9 +68,10 @@ public class UserController {
 
     @RequestMapping("/isLogin")
     @ResponseBody
-    public String isLogin(HttpSession session) {
+    public ResultInfo isLogin() {
         User user = (User) UserUtil.getUser(User.class);
-        session.setAttribute("user", user);
-        return "";
+        ResultInfo resultInfo = new ResultInfo();
+        resultInfo.setFlag(null != user);
+        return resultInfo;
     }
 }

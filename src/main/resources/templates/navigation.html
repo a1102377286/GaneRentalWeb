@@ -8,13 +8,29 @@
     var contextPath = [[${#request.getContextPath()}]];
 </script>
 <script>
+
     $(function () {
         $.ajax({
             url:contextPath +"/user/isLogin",
             data:{},
             dataType:"json",
-            async:true,
+            async:false,
             success:function (data) {
+                if (data.flag){
+                    $("#loginInfo").html("<div class=\"order\">\n" +
+                        "            <a href=\"/rental/center\"><p>个人中心</p></a>\n" +
+                        "        </div>\n" +
+                        "        <div class=\"login\">\n" +
+                        "            <a href=\"/rental/user/logout\"><p>退出登录</p></a>\n" +
+                        "        </div>")
+                } else {
+                    $("#loginInfo").html("<div class=\"register\">\n" +
+                        "            <a href=\"\"><p>免费注册</p></a>\n" +
+                        "        </div>\n" +
+                        "        <div class=\"login\">\n" +
+                        "            <a href=\"/rental/login\"><p>登录</p></a>\n" +
+                        "        </div>")
+                }
             }
         })
     })
@@ -31,21 +47,21 @@
 <!--        <li><a target="_blank" href="">二手电脑</a></li>-->
     </ul>
 
-    <div class="user-info">
+    <div class="user-info" id="loginInfo">
 
         <!-- 我的订单 -->
-        <div class="register" th:if="${session.user == null}">
-            <a href=""><p>免费注册</p></a>
-        </div>
-        <div class="login" th:if="${session.user == null}">
-            <a href="/rental/login"><p>登录</p></a>
-        </div>
-        <div class="order" th:if="${session.user != null}">
-            <a href="/rental/center"><p>个人中心</p></a>
-        </div>
-        <div class="login" th:if="${session.user != null}">
-            <a href="/rental/user/logout"><p>推出登录</p></a>
-        </div>
+<!--        <div class="register">-->
+<!--            <a href=""><p>免费注册</p></a>-->
+<!--        </div>-->
+<!--        <div class="login">-->
+<!--            <a href="/rental/login"><p>登录</p></a>-->
+<!--        </div>-->
+<!--        <div class="order">-->
+<!--            <a href="/rental/center"><p>个人中心</p></a>-->
+<!--        </div>-->
+<!--        <div class="login">-->
+<!--            <a href="/rental/user/logout"><p>退出登录</p></a>-->
+<!--        </div>-->
     </div>
 </div>
 </body>
