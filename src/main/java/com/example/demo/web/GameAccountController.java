@@ -30,4 +30,16 @@ public class GameAccountController {
     public String accountPurchase() {
         return "account-purchase";
     }
+
+    @RequestMapping("/accountSale")
+    @ResponseBody
+    public String accountSale(GameAccount account) {
+        System.out.println("sale");
+        return "success";
+    }
+
+    @RequestMapping("/success")
+    public String success() {
+        return "success";
+    }
 }

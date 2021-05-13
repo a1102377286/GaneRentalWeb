@@ -28,4 +28,7 @@ public class GameAccount extends Model<GameAccount> {
     private String lessorUID;
     private String gameId;
 
+    private String username;
+    private String password;
+    private String descript;
 }
