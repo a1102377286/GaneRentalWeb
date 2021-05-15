@@ -3,9 +3,11 @@ package com.example.demo.web;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.entity.GameAccount;
+import com.example.demo.entity.ResultInfo;
 import com.example.demo.entity.User;
 import com.example.demo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @RequestMapping("/account")
+@Controller
 public class GameAccountController {
     @Autowired
     private AccountService accountService;
@@ -33,9 +36,11 @@ public class GameAccountController {
 
     @RequestMapping("/accountSale")
     @ResponseBody
-    public String accountSale(GameAccount account) {
-        System.out.println("sale");
-        return "success";
+    public ResultInfo accountSale(GameAccount account) {
+        boolean flag = accountService.saveAccount(account);
+        ResultInfo info = new ResultInfo();
+        info.setFlag(flag);
+        return info;
     }
 
     @RequestMapping("/success")

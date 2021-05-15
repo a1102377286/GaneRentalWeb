@@ -11,4 +11,13 @@ public class AccountService extends ServiceImpl<AccountMapper, GameAccount> {
     @Autowired(required = false)
     private AccountMapper accountMapper;
 
+    public boolean saveAccount(GameAccount account) {
+        try {
+            accountMapper.insert(account);
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

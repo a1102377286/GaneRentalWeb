@@ -17,12 +17,21 @@
 		$(function () {
 			$("#navigation").load(contextPath + "/navigation");
 			$("#confirm").click(function () {
-				alert("dian")
 				$.post(contextPath + "/account/accountSale",
 						$("#accountForm").serialize(),
 						function (data) {
-							window.location.replace(contextPath + "/account/success");
+							if(data.flag){
+								window.location.replace(contextPath + "/account/success");
+							}else{
+								alert("上架失败！");
+							}
 						},"json")
+				// $.post(contextPath + "/account/accountSale",
+				// 		$("#accountForm").serialize(),
+				// 		function (data) {
+				// 			alert("dian")
+				// 			window.location.replace(contextPath + "/account/success");
+				// 		},"json")
 			});
 		})
 	</script>
