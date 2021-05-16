@@ -156,24 +156,26 @@
 
                     </div>
                 </div>
+                <!--
                 <div class="s-check fr">
                     <input type="checkbox" class="sort-input" name="" id="123">
                     <span>平台代发</span>
                     <input type="checkbox" class="sort-input" name="" id="456">
                     <span>卖家发货</span>
                 </div>
+                -->
                 <div class="page" id="selPage">
-                    <a href="javascript:void(0)" class="back arrow" th:onclick="|loadData(${pre})|"></a>
-                    <span class="page-num"><span class="page-cur">1</span>/20</span>
-                    <a href="javascript:void(0)" class="next arrow" th:onclick="|loadData(${next})|"></a>
+                    <a href="javascript:void(0)" class="back arrow" th:onclick="|loadData(${pre}, ${queryDesc})|"></a>
+                    <span class="page-num" th:text="${current}"></span>
+                    <a href="javascript:void(0)" class="next arrow" th:onclick="|loadData(${next}, ${queryDesc})|"></a>
 
                 </div>
             </div>
             <div class="search">
                 <div class="left-search s-f fl">
                     <p>关键字：</p>
-                    <input type="text" name="" id="keywords" placeholder="请输入您要搜索的关键字">
-                    <div class="s-btn">确定</div>
+                    <input type="text" name="" id="keywords" placeholder="请输入您要搜索的关键字" th:value="${queryDesc}">
+                    <div class="s-btn" th:onclick="|loadDataByDesc()|">确定</div>
                 </div>
             </div>
         </div>
@@ -204,15 +206,17 @@
                             </span>
                         </div>
                     </div>
-                    <div class="item-price fl">
-                        ￥3900
+                    <div class="item-price fl" th:text="${account.money}">
                     </div>
                     <div class="buy fl">
-                        <a href="">
-                            <div class="buy-btn">
-                                立即租赁
-                            </div>
+                        <a href="" th:onclick="accountDetail([[${account.accountId}]]);">
+                        <div class="buy-btn" >
+                            立即租赁
+                        </div>
                         </a>
+<!--                        <a href="">-->
+<!--                            -->
+<!--                        </a>-->
                     </div>
                 </li>
             </ul>

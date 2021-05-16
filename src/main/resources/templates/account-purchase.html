@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="css/material-purchase.css" th:href="@{/css/material-purchase.css}">
 	<script src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 	<script src="js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
-	<title>材料求购</title>
+	<title>账号出租</title>
 	<script th:inline="javascript">
 		var contextPath = [[${#request.getContextPath()}]];
 	</script>
@@ -22,14 +22,13 @@
 				if (!flag){
 					return;
 				}
-				alert("校验成功");
 				$.post(contextPath + "/account/accountSale",
 						$("#accountForm").serialize(),
 						function (data) {
 							if(data.flag){
 								window.location.replace(contextPath + "/account/success");
 							}else{
-								alert("上架失败！");
+								alert(data.errorMsg);
 							}
 						},"json")
 			});

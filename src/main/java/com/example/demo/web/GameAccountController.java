@@ -7,13 +7,14 @@ import com.example.demo.entity.GameAccount;
 import com.example.demo.entity.ResultInfo;
 import com.example.demo.entity.User;
 import com.example.demo.service.AccountService;
+import com.example.demo.service.UserService;
+import com.example.demo.util.UserUtil;
+import com.example.demo.util.ZqbPublicUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 @RequestMapping("/account")
 @Controller
@@ -21,11 +22,24 @@ public class GameAccountController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/accountList")
-    public String getUserList(Model model) {
-        QueryWrapper<GameAccount> wrapper = new QueryWrapper();
-        IPage<GameAccount> iPage = accountService.page(new Page<>(1, 3));
+    public String getUserList(Model model, Integer page, String desc) {
+        if (null == page || 0 == page) {
+            page = 1;
+        }
+        QueryWrapper<GameAccount> wrapper = new QueryWrapper<>();
+        if (!ZqbPublicUtil.strEmpty(desc)) {
+            model.addAttribute("queryDesc", desc);
+            wrapper.like("title", desc);
+        } else {
+            model.addAttribute("queryDesc", null);
+        }
+        IPage<GameAccount> iPage = accountService.page(new Page<>(page, 2), wrapper);
         model.addAttribute("accountList", iPage.getRecords());
+        model.addAttribute("current", page);
         model.addAttribute("pre", iPage.getCurrent() - 1);
         model.addAttribute("next", iPage.getCurrent() + 1);
         return "accountList";
@@ -39,8 +53,15 @@ public class GameAccountController {
     @RequestMapping("/accountSale")
     @ResponseBody
     public ResultInfo accountSale(GameAccount account) {
-        boolean flag = accountService.saveAccount(account);
+        User loginUser = (User) UserUtil.getUser(User.class);
         ResultInfo info = new ResultInfo();
+        if (null == loginUser) {
+            info.setFlag(false);
+            info.setErrorMsg("请先登录");
+            return info;
+        }
+        account.setLessorUID(loginUser.getUid());
+        boolean flag = accountService.saveAccount(account);
         info.setFlag(flag);
         return info;
     }
@@ -48,5 +69,32 @@ public class GameAccountController {
     @RequestMapping("/success")
     public String success() {
         return "success";
+    }
+
+    @RequestMapping("/detail")
+    public String details(Model model, String accountId) {
+        if (ZqbPublicUtil.strEmpty(accountId)) {
+            return "index";
+        }
+        QueryWrapper<GameAccount> wrapper = new QueryWrapper<>();
+        wrapper.eq("accountId", accountId);
+        try {
+            GameAccount account = accountService.getOne(wrapper);
+            if (null == account) {
+                return "index";
+            }
+            QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+            userQueryWrapper.eq("uid", account.getLessorUID());
+            User user = userService.getOne(userQueryWrapper);
+            if (null == user) {
+                return "index";
+            }
+            model.addAttribute("selAccount", account);
+
+            return "details";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "index";
+        }
     }
 }

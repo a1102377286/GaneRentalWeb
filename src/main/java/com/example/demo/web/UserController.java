@@ -30,7 +30,7 @@ public class UserController {
             info.setErrorMsg("账号或密码错误！");
         } else {
             info.setFlag(true);
-            UserUtil.setVal(user);
+            UserUtil.setVal(loginUser);
 //            redirectIndex();
         }
         return info;

@@ -18,8 +18,28 @@
 			// $("#navigation").load(contextPath + "/navigation");
 			$("#body").load(contextPath + "/account/accountList");
 		})
-		function loadData(page) {
-			alert(page)
+		function loadData(page, desc) {
+			$("#body").load(contextPath + "/account/accountList", queryWrapper(page, desc));
+		}
+		function loadDataByDesc() {
+			var desc = $("#keywords").val();
+			$("#body").load(contextPath + "/account/accountList", queryWrapper(1, desc));
+		}
+		function queryWrapper(page, desc) {
+			var query = {};
+			query.page = typeof page == "undefined" ? 1 : page;
+			query.desc = desc;
+			return query;
+		}
+
+		function accountDetail(accountId) {
+			window.location.replace(contextPath + "/account/detail", createQuery(accountId));
+		}
+
+		function createQuery(accountId) { // 展示商品详细的查询条件
+			var query = {};
+			query.accountId = accountId;
+			return query;
 		}
 	</script>
 </head>

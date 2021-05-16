@@ -21,32 +21,10 @@
 </head>
 <body>
 	<!-- 顶部导航 -->
-	<div class="header">
-		<div class="wrapper clearfix">
-			<ul class="nav">
-				<li class="active"><a href="">首页</a></li>
-				<li><a href="">账号交易</a></li>
-				<li><a href="">账号求购</a></li>
-				<li><a href="">材料交易</a></li>
-				<li><a href="">材料求购</a></li>
-				<li><a href="">金币交易</a></li>
-				<li><a href="">二手电脑</a></li>
-			</ul>
-
-			<div class="user-info">
-				<!-- 头像 -->
-				<div class="profile">
-					<a href=""><img src="images/icon/profile.png" alt=""></a>
-				</div>
-				<!-- 我的订单 -->
-				<div class="order">
-					<a href=""><p>我的订单</p></a>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="header" id="navigation"></div>
 
 	<div class="content fl">
+
 		<div class="wrapper detail-wrapper clearfix">
 			<!-- 商品详情 -->
 			<div class="details fl">
@@ -68,7 +46,7 @@
 					<!-- 右侧商品详情 -->
 					<div class="item-info-panel fl">
 						<!-- 商品名称 -->
-						<div class="item-title">
+						<div class="item-title" th:text="${selAccount.title}">
 							安徽三区搬砖号
 						</div>
 						<div class="item-info-wrapper">
@@ -105,37 +83,37 @@
 					</div>
 				</div>
 				<!-- 商品介绍 -->
-				
+
 			</div>
 			<!-- 卖家信息 -->
-			<div class="right-panel fr">
-				<div class="seller fl">
-					<div class="seller-info">	
-						<div class="seller-profile">
-							<img src="images/icon/profile.png" alt="">
-						</div>
-						<div class="seller-credit">
-							<span>卖家信誉：</span>
-							<ul class="seller-comment ">
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ul>
-						</div>
-						<div class="success-order status">
-							<span>成交订单：&nbsp;&nbsp;</span><span>258笔</span>
-						</div>
-						<div class="cancel-order status">
-							<span>取消订单 &nbsp;&nbsp;</span><span>11笔</span>
-						</div>
-						<div class="percent status">
-							<span>成交概率 &nbsp;&nbsp;</span><span>99%</span>
-						</div>
-					</div>
-				</div>
-			</div>
+            <div class="right-panel fr">
+                <div class="seller fl">
+                    <div class="seller-info">
+                        <div class="seller-profile">
+                            <img src="images/icon/profile.png" alt="">
+                        </div>
+                        <div class="seller-credit">
+                            <span>卖家信誉：</span>
+                            <ul class="seller-comment ">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <div class="success-order status">
+                            <span>成交订单：&nbsp;&nbsp;</span><span>258笔</span>
+                        </div>
+                        <div class="cancel-order status">
+                            <span>取消订单 &nbsp;&nbsp;</span><span>11笔</span>
+                        </div>
+                        <div class="percent status">
+                            <span>成交概率 &nbsp;&nbsp;</span><span>99%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 			<div class="item-intro fl">
 				<!-- tab切换 -->
 				<div class="intro-nav">
@@ -145,16 +123,16 @@
 						<li>售后服务</li>
 					</ul>
 				</div>
-				<div class="intro-tabs">
-					<div class="tab tab1">
-						<img src="images/TB2Z_1YcfQs8KJjSZFEXXc9RpXa-126446588.jpg" alt="">
-						<img src="images/TB2lOARhmfD8KJjSszhXXbIJFXa-126446588.jpg" alt="">
+				<div class="intro-tabs" >
+					<div class="tab tab1" th:text="${selAccount.descript}">
+<!--						<img src="images/TB2Z_1YcfQs8KJjSZFEXXc9RpXa-126446588.jpg" alt="" th:src="@{/images/TB2Z_1YcfQs8KJjSZFEXXc9RpXa-126446588.jpg}">-->
+<!--						<img src="images/TB2lOARhmfD8KJjSszhXXbIJFXa-126446588.jpg" alt="" th:src="@{/images/TB2lOARhmfD8KJjSszhXXbIJFXa-126446588.jpg}">-->
 					</div>
-					<div class="tab tab2" style="display: none;">
-						tab2
+					<div class="tab tab2" style="display: none;" >
+						该商品信息正确
 					</div>
 					<div class="tab tab3" style="display: none;">
-						tab3
+						没有售后哦，拜拜了您嘞
 					</div>
 				</div>
 			</div>

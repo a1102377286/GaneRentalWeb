@@ -17,6 +17,9 @@
 		$(function () {
 			$("#navigation").load(contextPath + "/navigation");
 		})
+		function continueRental() {
+			window.location.replace(contextPath + "/account-purchase");
+		}
 	</script>
 </head>
 <body>
@@ -39,7 +42,7 @@
 					<div class="a-text2 t-c2">
 						为保障交易安全，请您不要在游戏内泄露手机号，QQ号等个人信息，谨防诈骗
 					</div>
-					<div class="btn">
+					<div class="btn" th:onclick="|continueRental()|">
 						继续发布
 					</div>
 				</div>
