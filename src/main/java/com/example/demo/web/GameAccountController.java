@@ -1,6 +1,7 @@
 package com.example.demo.web;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.entity.GameAccount;
 import com.example.demo.entity.ResultInfo;
@@ -20,13 +21,14 @@ public class GameAccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/userList")
-    public List<User> getUserList(Model model) {
-        Page<GameAccount> iPage = accountService.page(new Page<>(1,10), new QueryWrapper<>());
+    @RequestMapping("/accountList")
+    public String getUserList(Model model) {
+        QueryWrapper<GameAccount> wrapper = new QueryWrapper();
+        IPage<GameAccount> iPage = accountService.page(new Page<>(1, 3));
         model.addAttribute("accountList", iPage.getRecords());
         model.addAttribute("pre", iPage.getCurrent() - 1);
         model.addAttribute("next", iPage.getCurrent() + 1);
-        return null;
+        return "accountList";
     }
 
     @RequestMapping("/accountPurchase")

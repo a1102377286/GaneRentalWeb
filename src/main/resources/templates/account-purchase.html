@@ -5,10 +5,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />  
 	<meta name="keywords" content=" " />  
 	<meta name="description" content=" " />
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/material-purchase.css">
-	<script src="js/jquery-1.8.1.min.js"></script>
+	<link rel="stylesheet" href="css/reset.css" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" href="css/common.css" th:href="@{/css/common.css}">
+	<link rel="stylesheet" href="css/material-purchase.css" th:href="@{/css/material-purchase.css}">
+	<script src="js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+	<script src="js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
 	<title>材料求购</title>
 	<script th:inline="javascript">
 		var contextPath = [[${#request.getContextPath()}]];
@@ -17,6 +18,11 @@
 		$(function () {
 			$("#navigation").load(contextPath + "/navigation");
 			$("#confirm").click(function () {
+				var flag = $("#accountForm").valid();
+				if (!flag){
+					return;
+				}
+				alert("校验成功");
 				$.post(contextPath + "/account/accountSale",
 						$("#accountForm").serialize(),
 						function (data) {
@@ -26,12 +32,36 @@
 								alert("上架失败！");
 							}
 						},"json")
-				// $.post(contextPath + "/account/accountSale",
-				// 		$("#accountForm").serialize(),
-				// 		function (data) {
-				// 			alert("dian")
-				// 			window.location.replace(contextPath + "/account/success");
-				// 		},"json")
+			});
+
+			$("#accountForm").validate({
+				rules:{
+					username:{
+						required:true
+					},
+					password:{
+						required:true
+					},
+					title:{
+						required:true
+					},
+					money:{
+						required:true,
+						number:true
+					}
+
+				},
+				errorPlacement:function (error,element) {
+					var cls = element.prop("class");
+					if(cls.indexOf('error') > -1){
+						element.css("border","solid 1px #ff0000");
+					}else{
+						element.css("border","");
+					}
+				},
+				success:function (element) {
+
+				}
 			});
 		})
 	</script>
@@ -71,6 +101,12 @@
 			</div>
 			<form action="#" method="post" id="accountForm">
 			<div class="material-form">
+				<div class="m-name m-text">
+					<span>输入商品标题：</span>
+					<input type="text" class="m-input" id="title" name="title">
+				</div>
+				<br>
+				<br>
 				<div class="m-name m-text">
 					<span>输入游戏账号：</span>
 					<input type="text" class="m-input" id="username" name="username">

@@ -1,44 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />  
 	<meta name="keywords" content=" " />  
 	<meta name="description" content=" " />
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/success.css">
+	<link rel="stylesheet" href="css/reset.css" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" href="css/common.css" th:href="@{/css/common.css}">
+	<link rel="stylesheet" href="css/success.css" th:href="@{/css/success.css}">
 	<title>发布成功</title>
+	<script src="js/jquery-1.8.1.min.js" th:src="@{/js/jquery-1.8.1.min.js}"></script>
+	<script th:inline="javascript">
+		var contextPath = [[${#request.getContextPath()}]];
+	</script>
+	<script>
+		$(function () {
+			$("#navigation").load(contextPath + "/navigation");
+		})
+	</script>
 </head>
 <body>
 	<!-- 顶部导航 -->
-	<div class="header">
-		<div class="wrapper clearfix">
-			<ul class="nav">
-				<li><a href="">首页</a></li>
-				<li><a target="_blank" href="account-deal.html">账号交易</a></li>
-				<li><a target="_blank" href="account-purchase.html">账号求购</a></li>
-				<li><a target="_blank" href="material-deal.html">材料交易</a></li>
-				<li><a target="_blank" href="account-purchase.html">材料求购</a></li>
-				<li><a target="_blank" href="">金币交易</a></li>
-				<li><a target="_blank" href="">二手电脑</a></li>
-			</ul>
+	<div class="header fl" id="navigation"></div>
 
-			<div class="user-info">
-				
-				<!-- 我的订单 -->
-				<div class="register">
-					<a href=""><p>免费注册</p></a>
-				</div>
-				<div class="login">
-					<a href=""><p>登录</p></a>
-				</div>
-				<div class="order">
-					<a href=""><p>个人中心</p></a>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="content">
 		<div class="wrapper clearfix">
 			<div class="b-tit">
