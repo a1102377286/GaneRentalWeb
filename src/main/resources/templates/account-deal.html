@@ -33,7 +33,7 @@
 		}
 
 		function accountDetail(accountId) {
-			window.location.replace(contextPath + "/account/detail", createQuery(accountId));
+			window.location.replace(contextPath + "/account/detail?accountId=" + accountId);
 		}
 
 		function createQuery(accountId) { // 展示商品详细的查询条件

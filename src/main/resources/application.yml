@@ -4,9 +4,9 @@ server:
     context-path: /rental
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/rental?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/gamerental?serverTimezone=UTC
     username: root
-    password: 1234567
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
     mvc:
