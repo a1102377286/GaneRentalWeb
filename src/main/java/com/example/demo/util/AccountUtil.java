@@ -14,6 +14,18 @@ public class AccountUtil {
         jedis.set("selAccount", JSON.toJSONString(account));
     }
 
+    public static void setAccId(String accountId) {
+        if (ZqbPublicUtil.strEmpty(accountId)) {
+            return;
+        }
+        jedis.set("selAccountId", accountId);
+    }
+
+    public static String getSelAccountId() {
+        String string = jedis.get("selAccountId");
+        return string;
+    }
+
     public static GameAccount getAccount() {
         String acc = jedis.get("selAccount");
         if (ZqbPublicUtil.strEmpty(acc)) {

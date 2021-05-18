@@ -8,6 +8,7 @@ import com.example.demo.entity.ResultInfo;
 import com.example.demo.entity.User;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.UserService;
+import com.example.demo.util.AccountUtil;
 import com.example.demo.util.UserUtil;
 import com.example.demo.util.ZqbPublicUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,8 @@ public class GameAccountController {
     }
 
     @RequestMapping("/detail")
-    public String details(Model model, String accountId) {
+    public String details(Model model) {
+        String accountId = AccountUtil.getSelAccountId();
         if (ZqbPublicUtil.strEmpty(accountId)) {
             return "index";
         }
@@ -96,5 +98,19 @@ public class GameAccountController {
             e.printStackTrace();
             return "index";
         }
+    }
+
+    @RequestMapping("/accountDetail")
+    @ResponseBody
+    public ResultInfo accountDetail(String accountId){
+        ResultInfo info = new ResultInfo();
+        if (ZqbPublicUtil.strEmpty(accountId)) {
+            info.setFlag(false);
+            return info;
+        }
+
+        AccountUtil.setAccId(accountId);
+        info.setFlag(true);
+        return info;
     }
 }

@@ -5,10 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />  
 	<meta name="keywords" content=" " />  
 	<meta name="description" content=" " />
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/details.css">
-	<script src="js/jquery-1.8.1.min.js"></script>
+	<link rel="stylesheet" href="css/reset.css" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" href="css/common.css" th:href="@{/css/common.css}">
+	<link rel="stylesheet" href="css/details.css" th:href="@{/css/details.css}">
+	<script src="js/jquery-1.8.1.min.js" th:src="@{/js/jquery-1.8.1.min.js}"></script>
 	<title>商品详情</title>
 	<script th:inline="javascript">
 		var contextPath = [[${#request.getContextPath()}]];
@@ -17,6 +17,11 @@
 		$(function () {
 			$("#navigation").load(contextPath + "/navigation")
 		})
+
+		function rental() {
+
+			alert(amountNum);
+		}
 	</script>
 </head>
 <body>
@@ -74,8 +79,8 @@
 								<span id="amount">1</span>
 								<span  class="amount-btn" id="plus">+</span>
 							</div>
-							<a href="" >
-								<div class="buy-btn">
+							<a href="javascript:void(0)" >
+								<div class="buy-btn" th:onclick="rental()">
 									立即购买
 								</div>
 							</a>

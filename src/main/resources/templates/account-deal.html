@@ -33,7 +33,20 @@
 		}
 
 		function accountDetail(accountId) {
-			window.location.replace(contextPath + "/account/detail?accountId=" + accountId);
+			$.ajax({
+				url:contextPath + "/account/accountDetail",
+				data:{
+					accountId:accountId
+				},
+				method:"post",
+				success:function (data) {
+					if (data.flag){
+						window.location.replace(contextPath + "/account/detail");
+					}
+				},
+				dataType:"json"
+			})
+
 		}
 
 		function createQuery(accountId) { // 展示商品详细的查询条件
