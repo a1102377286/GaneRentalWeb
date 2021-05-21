@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/jquery-1.8.1.min.js" th:src="@{/js/jquery-1.8.1.min.js}"></script>
 </head>
 <body>
 <div class="wrapper detail-wrapper clearfix">
@@ -13,13 +14,13 @@
             <!-- 左侧商品图片 -->
             <div class="item-img fl">
                 <div class="img-big">
-                    <img src="" alt="">
+                    <img src="" alt="" th:src="@{/images/1.jpg}">
                 </div>
                 <div class="img-sm">
                     <ul>
-                        <li class="active"><img src="images/test.jpg" alt=""></li>
-                        <li><img src="images/detail-img.jpg" alt=""></li>
-                        <li><img src="images/tes.jpg" alt=""></li>
+                        <li class="active"><img src="images/test.jpg" alt="" th:src="@{/images/1.jpg}"></li>
+                        <li><img src="images/detail-img.jpg" alt="" th:src="@{/images/1.jpg}"></li>
+                        <li><img src="images/tes.jpg" alt="" th:src="@{/images/1.jpg}"></li>
                     </ul>
                 </div>
             </div>

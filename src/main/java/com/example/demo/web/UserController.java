@@ -1,15 +1,21 @@
 package com.example.demo.web;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.demo.entity.Order;
 import com.example.demo.entity.ResultInfo;
 import com.example.demo.entity.User;
+import com.example.demo.service.OrderService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.UserUtil;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -17,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping("/login")
     @ResponseBody
@@ -31,7 +40,6 @@ public class UserController {
         } else {
             info.setFlag(true);
             UserUtil.setVal(loginUser);
-//            redirectIndex();
         }
         return info;
     }
@@ -73,5 +81,22 @@ public class UserController {
         ResultInfo resultInfo = new ResultInfo();
         resultInfo.setFlag(null != user);
         return resultInfo;
+    }
+
+    @RequestMapping("/userOrder")
+    public String getUserOrder(Model model){
+        User loginUser = (User) UserUtil.getUser(User.class);
+        String uid = loginUser.getUid();
+        QueryWrapper<Order> wrapper = new QueryWrapper<>();
+        wrapper.eq("tenantryUID", uid);
+        List<Order> tenantryList = orderService.list(wrapper);
+
+        QueryWrapper<Order> lessorWrapper = new QueryWrapper<>();
+        lessorWrapper.eq("lessorUID", uid);
+        List<Order> lessorList = orderService.list(lessorWrapper);
+
+        model.addAttribute("tenantryOrder", tenantryList);
+        model.addAttribute("lessorOrder", lessorList);
+        return "center";
     }
 }

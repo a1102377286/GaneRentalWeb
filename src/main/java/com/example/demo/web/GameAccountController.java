@@ -38,7 +38,7 @@ public class GameAccountController {
         } else {
             model.addAttribute("queryDesc", null);
         }
-        IPage<GameAccount> iPage = accountService.page(new Page<>(page, 2), wrapper);
+        IPage<GameAccount> iPage = accountService.page(new Page<>(page, 10), wrapper);
         model.addAttribute("accountList", iPage.getRecords());
         model.addAttribute("current", page);
         model.addAttribute("pre", iPage.getCurrent() - 1);
