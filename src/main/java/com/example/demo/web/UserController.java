@@ -6,6 +6,7 @@ import com.example.demo.entity.ResultInfo;
 import com.example.demo.entity.User;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.UserService;
+import com.example.demo.util.TimeUtil;
 import com.example.demo.util.UserUtil;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -97,6 +99,40 @@ public class UserController {
 
         model.addAttribute("tenantryOrder", tenantryList);
         model.addAttribute("lessorOrder", lessorList);
+        return "center";
+    }
+
+    @RequestMapping("/center")
+    public String userCenter(Model model){
+        User user = (User) UserUtil.getUser(User.class);
+        String uid = user.getUid();
+        QueryWrapper<Order> tenantryWrapper = new QueryWrapper<>();
+        tenantryWrapper.eq("tenantryUID", uid);
+        QueryWrapper<Order> lessorWrapper = new QueryWrapper<>();
+        lessorWrapper.eq("lessorUID", uid);
+        try {
+            List<Order> tenantryList = orderService.list(tenantryWrapper);
+            if (null == tenantryList) {
+                tenantryList = new ArrayList<>();
+            }
+            List<Order> lessorList = orderService.list(lessorWrapper);
+            if (null == lessorList) {
+                lessorList = new ArrayList<>();
+            }
+            for (Order order : lessorList) {
+                order.setChanged(TimeUtil.convertDate(order.getChanged()));
+            }
+            for (Order order : tenantryList) {
+                order.setChanged(TimeUtil.convertDate(order.getChanged()));
+            }
+            model.addAttribute("lessorList", lessorList);
+            model.addAttribute("tenantryList", tenantryList);
+            model.addAttribute("user", user);
+        } catch (Exception e) {
+            return "center";
+        }
+
+        model.addAttribute("user", user);
         return "center";
     }
 }

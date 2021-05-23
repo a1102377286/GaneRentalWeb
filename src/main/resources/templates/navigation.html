@@ -17,8 +17,8 @@
             async:false,
             success:function (data) {
                 if (data.flag){
-                    $("#loginInfo").html("<div class=\"order\">\n" +
-                        "            <a href=\"/rental/center\"><p>个人中心</p></a>\n" +
+                    $("#loginInfo").html(" <div class=\"order\" onclick=\"center()\">\n" +
+                        "            <a href=\"javascript:void(0) \" ><p>个人中心</p></a>\n" +
                         "        </div>\n" +
                         "        <div class=\"login\">\n" +
                         "            <a href=\"/rental/user/logout\"><p>退出登录</p></a>\n" +
@@ -32,8 +32,14 @@
                         "        </div>")
                 }
             }
+
+
         });
+
     })
+    function center() {
+        window.location.replace(contextPath + "/user/center")
+    }
 </script>
 <body>
 <div class="wrapper clearfix">
@@ -48,20 +54,20 @@
     </ul>
 
     <div class="user-info" id="loginInfo">
-
-        <!-- 我的订单 -->
-<!--        <div class="register">-->
-<!--            <a href=""><p>免费注册</p></a>-->
-<!--        </div>-->
-<!--        <div class="login">-->
-<!--            <a href="/rental/login"><p>登录</p></a>-->
-<!--        </div>-->
-<!--        <div class="order">-->
-<!--            <a href="/rental/center"><p>个人中心</p></a>-->
-<!--        </div>-->
-<!--        <div class="login">-->
-<!--            <a href="/rental/user/logout"><p>退出登录</p></a>-->
-<!--        </div>-->
+<!--
+         我的订单
+        <div class="register">
+            <a href=""><p>免费注册</p></a>
+        </div>
+        <div class="login">
+            <a href="/rental/login"><p>登录</p></a>
+        </div>
+        <div class="order" onclick="center()">
+            <a href="javascript:void(0) " ><p>个人中心</p></a>
+        </div>
+        <div class="login">
+            <a href="/rental/user/logout"><p>退出登录</p></a>
+        </div>-->
     </div>
 </div>
 </body>

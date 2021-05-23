@@ -91,6 +91,7 @@ public class GameAccountController {
             if (null == user) {
                 return "index";
             }
+            AccountUtil.setVal(account);
             model.addAttribute("selAccount", account);
 
             return "details";

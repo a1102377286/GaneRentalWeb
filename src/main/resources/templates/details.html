@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="css/common.css" th:href="@{/css/common.css}">
 	<link rel="stylesheet" href="css/details.css" th:href="@{/css/details.css}">
 	<script src="js/jquery-1.8.1.min.js" th:src="@{/js/jquery-1.8.1.min.js}"></script>
+	<script src="js/jquery.magnific-popup.js" type="text/javascript" th:src="@{/js/jquery.magnific-popup.js}"></script>
+	<link href="css/popup-box.css" rel="stylesheet" type="text/css" media="all" th:href="@{/css/popup-box.css}"/>
 	<title>商品详情</title>
 	<script th:inline="javascript">
 		var contextPath = [[${#request.getContextPath()}]];
@@ -23,6 +25,43 @@
 			alert(amountNum);
 		}
 	</script>
+
+	<style type="text/css">
+		body{
+			margin: 0px;
+		}
+		.zhezhao{
+			position: fixed;
+			left: 0px;
+			top: 0px;
+			background: #000;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.5);
+		}
+		.tankuang{
+			position: relative;
+			/*background: #fff;*/
+			width: 50%;
+			height: 80%;
+			border-radius: 5px;
+			margin: 5% auto;
+		}
+		#header{
+			height: 40px;
+		}
+		#header-right{
+			position: absolute;
+			width: 25px;
+			height: 25px;
+			border-radius: 5px;
+			background: red;
+			color: #fff;
+			right: 5px;
+			top: 5px;
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
 	<!-- 顶部导航 -->
@@ -48,6 +87,7 @@
 							</ul>
 						</div>
 					</div>
+
 					<!-- 右侧商品详情 -->
 					<div class="item-info-panel fl">
 						<!-- 商品名称 -->
@@ -59,10 +99,10 @@
 								凡商品的信息，图片中带联系信息的均是骗子，请谨慎防范！
 							</div>
 							<div class="price">
-								<span>商品价格:</span><span>￥10/H</span>
+								<span>商品价格:</span><span th:text="${selAccount.money}" id="accountMoney">￥10/H</span><span>/H</span>
 							</div>
 							<div class="item-i-list">
-								<span>商品编号：</span><span>95655</span>
+								<span>商品编号：</span><span th:text="${selAccount.accountId}">95655</span>
 							</div>
 							<div class="item-i-list">
 								<span>游戏区服：</span><span>安徽区/安徽3区（跨四）</span>
@@ -80,8 +120,8 @@
 								<span  class="amount-btn" id="plus">+</span>
 							</div>
 							<a href="javascript:void(0)" >
-								<div class="buy-btn" th:onclick="rental()">
-									立即购买
+								<div class="buy-btn" onclick="dianwo()" th:onclick="dianwo()">
+									立即租赁
 								</div>
 							</a>
 						</div>
@@ -95,7 +135,7 @@
                 <div class="seller fl">
                     <div class="seller-info">
                         <div class="seller-profile">
-                            <img src="images/icon/profile.png" alt="">
+                            <img src="images/icon/profile.png" alt="" th:src="@{/images/icon/profile.png}">
                         </div>
                         <div class="seller-credit">
                             <span>卖家信誉：</span>
@@ -147,7 +187,7 @@
 				</div>
 				<div class="r-list fl">
 					<div class="r-img fl">
-						<img src="images/wbm.png" alt="">
+						<img src="images/wbm.png" alt="" th:src="@{/images/wbm.png}">
 					</div>
 					<div class="r-text-c fr">
 						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
@@ -156,7 +196,7 @@
 				</div>
 				<div class="r-list fl">
 					<div class="r-img fl">
-						<img src="images/wbm.png" alt="">
+						<img src="images/wbm.png" alt="" th:src="@{/images/wbm.png}">
 					</div>
 					<div class="r-text-c fr">
 						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
@@ -165,7 +205,7 @@
 				</div>
 				<div class="r-list fl">
 					<div class="r-img fl">
-						<img src="images/wbm.png" alt="">
+						<img src="images/wbm.png" alt="" th:src="@{/images/wbm.png}">
 					</div>
 					<div class="r-text-c fr">
 						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
@@ -174,7 +214,7 @@
 				</div>
 				<div class="r-list fl">
 					<div class="r-img fl">
-						<img src="images/wbm.png" alt="">
+						<img src="images/wbm.png" alt="" th:src="@{/images/wbm.png}">
 					</div>
 					<div class="r-text-c fr">
 						<span><a href="">广东二区超大陆恍惚二神器天空红眼+10个搬砖号</a></span>
@@ -184,6 +224,70 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="zhezhao" id='zhezhao'>
+		<div class="tankuang">
+			<div id="header">
+				<div id="data">
+					<div style="font-size: 50px;color: red">
+						<span>本次需要支付:</span>2.5元</span>
+					</div>
+					<br>
+					<br>
+					<img src="images/1.jpg" th:src="@{/images/1.jpg}">
+					<br>
+					<br>
+					<a href="javascript:void(0)" >
+						<div class="buy-btn" onclick="" th:onclick="rental()">
+							立即租赁
+						</div>
+					</a>
+					<br>
+					<br>
+					<a href="javascript:void(0)" >
+						<div class="buy-btn" onclick="dianwo()" th:onclick="hidder()">
+							取消租赁
+						</div>
+					</a>
+					<br>
+					<br>
+				</div>
+				<div id="header-right" onclick="hidder()">x</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		document.getElementById('zhezhao').style.display="none";
+		function dianwo(){
+			document.getElementById('zhezhao').style.display="";
+		}
+
+
+		function rental() {
+			var money = $("#accountMoney").text();
+			var total = money * amountNum;
+
+			$.ajax({
+				url: contextPath + "/order/createOrder",
+				data:{
+					rentalTime: amountNum
+				},
+				success:function (data) {
+					if (!data.flag){
+						alert(data.errorMsg)
+					} else {
+						alert("租赁成功！")
+					}
+					hidder();
+				},
+				dataType:"json",
+				async:false
+			})
+		}
+		function hidder(){
+			document.getElementById('zhezhao').style.display="none";
+		}
+	</script>
 	<script>
 		var imgBig =$('.img-big').children('img');
 		var imgSm = $('.img-sm ul li');
@@ -229,8 +333,6 @@
 				tabList.eq(tabIndex).fadeIn(200).siblings().hide();
 			});
 		});
-
-		
 		
 	</script>
 </body>

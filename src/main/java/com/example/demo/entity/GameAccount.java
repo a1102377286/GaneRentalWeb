@@ -36,6 +36,8 @@ public class GameAccount extends Model<GameAccount> {
     private String password;
     private String descript;
 
+    private String isRental;
+
     public String getAccountId() {
         return accountId;
     }
@@ -106,5 +108,13 @@ public class GameAccount extends Model<GameAccount> {
 
     public void setDescript(String descript) {
         this.descript = descript;
+    }
+
+    public String getRental() {
+        return isRental;
+    }
+
+    public void setRental(String rental) {
+        isRental = rental;
     }
 }

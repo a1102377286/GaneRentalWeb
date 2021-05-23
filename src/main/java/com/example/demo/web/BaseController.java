@@ -33,11 +33,6 @@ public class BaseController {
         return "navigation";
     }
 
-    @RequestMapping("/center")
-    public String userCenter(String username){
-        return "center";
-    }
-
     @RequestMapping("/account-deal")
     public String accountdeal(){
         return "account-deal";

@@ -137,7 +137,7 @@
 .price{
 	margin-top: 20px;
 	height: 22px;
-	line-height: 22px;、
+	line-height: 22px;
 
 }
 .price span:nth-child(1){
@@ -216,6 +216,22 @@
 	color: #fff;
 	line-height: 40px;
 	text-align: center;
+}
+
+.buy-btn2{
+	/*float: right;*/
+	/*margin-top: 30px;
+	margin-left: 198px;*/
+	position: relative;
+	top: 30px;
+	left: 198px;
+	width: 190px;
+	height: 40px;
+	background-color: rgb(106, 156, 228);
+	border-radius: 5px;
+	font-size: 17px;
+	color: #fff;
+	line-height: 40px;
 }
 .buy-btn:hover{
 	background-color: #6190d1;
